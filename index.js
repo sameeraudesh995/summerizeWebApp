@@ -17,8 +17,24 @@ app.post("/posts",(req, res)=>{ //req=server eken ena dewal, res= api ywana dewa
     res.send(body);
 });
 
-app.get("/post/:id", (req, res)=>{ //call back function
-    console.log(req, params.id);
+app.get("/posts/:id", (req, res)=>{ //call back function
+    const postID =req.params.id;
+    console.log(postID);
+    const post = posts.find((post)=> post.id=== postID);
+    if(post){
+       res.json(post); 
+    }
+    else{
+        res.status(404).json({message : "post not found"});
+    }
+  
+});
+app.delete("/posts/:id", (req, res)=>{
+    const postID = req.params.id;
+    console.log(postID);
+    const post = posts.findIndex((post)=> post.id=== postID);
+    const deletePost = posts.splice(post, 1);
+    res.json({message : "Deleted"});
 });
 
 

@@ -46,7 +46,7 @@ app.put("/posts/:id", (req, res)=>{
     const updatedPost = req.body;
     const index = posts.findIndex((post)=> post.id=== postID);
     if(index !== -1){
-        posts [index]] = updatedPost;
+        posts [index] = updatedPost;
     res.json(posts[index]);
 }else{
     res.send(404).json({message : "post not found"});

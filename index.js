@@ -33,8 +33,25 @@ app.delete("/posts/:id", (req, res)=>{
     const postID = req.params.id;
     console.log(postID);
     const post = posts.findIndex((post)=> post.id=== postID);
-    const deletePost = posts.splice(post, 1);
+    if(post !== -1){
+        const deletePost = posts.splice(post, 1);
     res.json({message : "Deleted"});
+}else{
+    res.send(404).json({message : "post not found"});
+}
+    
+});
+app.put("/posts/:id", (req, res)=>{
+    const postID = req.params.id;
+    const updatedPost = req.body;
+    const index = posts.findIndex((post)=> post.id=== postID);
+    if(index !== -1){
+        posts [index]] = updatedPost;
+    res.json(posts[index]);
+}else{
+    res.send(404).json({message : "post not found"});
+}
+
 });
 
 

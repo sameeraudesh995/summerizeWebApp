@@ -1,58 +1,16 @@
 import  express, {json}  from "express";
 //const express =require("express"); declare express
+import morgan from "morgan";
+import postRouter from "./api/post";
 
 const app =express(); //create express instance 
 const PORT = 5000;// introduce runing port
+app.use(json()); //req respone send json format 
+app.use(morgan("dev"))
 
-app.use(json());//req respone send json format 
+app.use('/api/v1/posts', postRouter);
 
-let posts =[];
-app.get("/posts",(req, res)=>{ //req=server eken ena dewal, res= api ywana dewal
-    res.json(posts);
-});
 
-app.post("/posts",(req, res)=>{ //req=server eken ena dewal, res= api ywana dewal
-    const body = req.body;
-    posts.push(body);
-    res.send(body);
-});
-
-app.get("/posts/:id", (req, res)=>{ //call back function
-    const postID =req.params.id;
-    console.log(postID);
-    const post = posts.find((post)=> post.id=== postID);
-    if(post){
-       res.json(post); 
-    }
-    else{
-        res.status(404).json({message : "post not found"});
-    }
-  
-});
-app.delete("/posts/:id", (req, res)=>{
-    const postID = req.params.id;
-    console.log(postID);
-    const post = posts.findIndex((post)=> post.id=== postID);
-    if(post !== -1){
-        const deletePost = posts.splice(post, 1);
-    res.json({message : "Deleted"});
-}else{
-    res.send(404).json({message : "post not found"});
-}
-    
-});
-app.put("/posts/:id", (req, res)=>{
-    const postID = req.params.id;
-    const updatedPost = req.body;
-    const index = posts.findIndex((post)=> post.id=== postID);
-    if(index !== -1){
-        posts [index] = updatedPost;
-    res.json(posts[index]);
-}else{
-    res.send(404).json({message : "post not found"});
-}
-
-});
 
 
 

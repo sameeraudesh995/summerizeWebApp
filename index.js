@@ -10,11 +10,6 @@ app.use(morgan("dev"))
 
 app.use('/api/v1/posts', postRouter);
 
-
-
-
-
-
 app.listen(PORT, ()=>{
     console.log(`server is running on port ${PORT}`); // listent to responce of 5000 port
 });

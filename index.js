@@ -1,7 +1,7 @@
 import  express, {json}  from "express";
 //const express =require("express"); declare express
 import morgan from "morgan";
-import postRouter from "./api/post";
+import postRouter from "./api/post.js";
 
 const app =express(); //create express instance 
 const PORT = 5000;// introduce runing port

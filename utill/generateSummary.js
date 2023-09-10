@@ -4,7 +4,8 @@ export async function fetchSummary(prompt) {
     const oneai = new OneAI(process.env.ONEAI_API, {
         multilingual: {
           enabled: true
-      }});
+      },
+    });
       
       
       const pipeline = new oneai.Pipeline(oneai.skills.summarize());

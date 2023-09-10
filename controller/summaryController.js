@@ -1,3 +1,5 @@
+import { fetchSummary } from "../utill/generateSummary.js";
+
 let posts =[];
 
 export async function savePost(req, res) { //req=server eken ena dewal, res= api ywana dewal
@@ -46,3 +48,10 @@ export async function getPost (req, res){ //call back function
     }
   
 }
+export async function generateSummary(req, res){
+    try {
+        const generateReply = await fetchSummary(req.body.text)
+    } catch (error) {
+        
+    }
+ }

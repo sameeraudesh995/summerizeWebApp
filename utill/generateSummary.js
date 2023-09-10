@@ -1,21 +1,22 @@
 import { OneAI } from "oneai";
 
 export async function fetchSummary(prompt) {
-    const oneai = new OneAI("966bde33-47bf-4564-aadb-26f41dfeffca", {
+    const oneai = new OneAI(process.env.ONEAI_API, {
         multilingual: {
           enabled: true
       }});
       
-      const conversation = "";
       
-      const pipeline = new oneai.Pipeline(
-          oneai.skills.summarize(),
-      );
+      const pipeline = new oneai.Pipeline(oneai.skills.summarize());
+
       
-      pipeline
-        .run(conversation)
-        .then((output) => console.log(output))
-        .catch((error) => console.error(error));
+    try {
+         const response = await pipeline.run(prompt)
+         return response.summary.text;
+    } catch (error) {
+        throw new Error(error.message);
         
-      
+    }
+
+       
 }
